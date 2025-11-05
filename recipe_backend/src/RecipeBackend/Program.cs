@@ -13,13 +13,23 @@ builder.WebHost.ConfigureKestrel(options =>
     // No special limits; reserve the spot to customize if needed.
 });
 
-// Only set URLs if neither command-line nor environment provides them.
-// ASPNETCORE_URLS or --urls take precedence; otherwise default to http://0.0.0.0:3001
-var hasUrlsFromEnv = !string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ASPNETCORE_URLS"));
+// Explicit URL selection precedence:
+// 1) Command line --urls
+// 2) ASPNETCORE_URLS env var
+// 3) Fallback to http://0.0.0.0:3001
+// Note: Some orchestrators inject args without --urls; rely on env var or fallback accordingly.
+var urlsFromEnv = Environment.GetEnvironmentVariable("ASPNETCORE_URLS");
+var hasUrlsFromEnv = !string.IsNullOrWhiteSpace(urlsFromEnv);
 var hasUrlsFromArgs = args.Any(a => a.StartsWith("--urls", StringComparison.OrdinalIgnoreCase));
-if (!hasUrlsFromEnv && !hasUrlsFromArgs)
+
+if (hasUrlsFromEnv)
 {
-    // Default binding for containerized environments
+    // Respect ASPNETCORE_URLS if provided
+    builder.WebHost.UseUrls(urlsFromEnv!);
+}
+else if (!hasUrlsFromArgs)
+{
+    // Default binding for containerized environments if neither env nor --urls is provided
     builder.WebHost.UseUrls("http://0.0.0.0:3001");
 }
 
@@ -71,5 +81,10 @@ var logger = app.Services.GetRequiredService<ILoggerFactory>().CreateLogger("Sta
 logger.LogInformation("Environment: {Env}", app.Environment.EnvironmentName);
 logger.LogInformation("ASPNETCORE_URLS = {UrlsEnv}", Environment.GetEnvironmentVariable("ASPNETCORE_URLS") ?? "(null)");
 logger.LogInformation("Server listening on: {Addresses}", string.Join(", ", app.Urls));
+
+// Provide an explicit readiness log once app has started.
+// Note: app.Urls is populated after server starts; this log happens right before Run() blocking call.
+logger.LogInformation("Recipe backend starting. Health endpoint available at {HealthUrlHint}", 
+    (Environment.GetEnvironmentVariable("ASPNETCORE_URLS") ?? "http://0.0.0.0:3001").TrimEnd('/') + "/health");
 
 app.Run();
