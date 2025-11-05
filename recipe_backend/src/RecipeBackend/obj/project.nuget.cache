@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "BtJDFTiq8+TN3KvtWi6jU14/zDPMBH9b1Xogty/YK9mjdzwhDOEKznIBZUVZ8+d+r+A5BELYJuL9VqPz3NNpPQ==",
+  "success": true,
+  "projectFilePath": "/home/kavia/workspace/code-generation/recipe-manager-183563-183573/recipe_backend/src/RecipeBackend/RecipeBackend.csproj",
+  "expectedPackageFiles": [
+    "/home/kavia/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "/home/kavia/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
+    "/home/kavia/.nuget/packages/swashbuckle.aspnetcore/6.5.0/swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
+    "/home/kavia/.nuget/packages/swashbuckle.aspnetcore.swagger/6.5.0/swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
+    "/home/kavia/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.5.0/swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
+    "/home/kavia/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.5.0/swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,71 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/kavia/workspace/code-generation/recipe-manager-183563-183573/recipe_backend/src/RecipeBackend/RecipeBackend.csproj": {}
+  },
+  "projects": {
+    "/home/kavia/workspace/code-generation/recipe-manager-183563-183573/recipe_backend/src/RecipeBackend/RecipeBackend.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/kavia/workspace/code-generation/recipe-manager-183563-183573/recipe_backend/src/RecipeBackend/RecipeBackend.csproj",
+        "projectName": "RecipeBackend",
+        "projectPath": "/home/kavia/workspace/code-generation/recipe-manager-183563-183573/recipe_backend/src/RecipeBackend/RecipeBackend.csproj",
+        "packagesPath": "/home/kavia/.nuget/packages/",
+        "outputPath": "/home/kavia/workspace/code-generation/recipe-manager-183563-183573/recipe_backend/src/RecipeBackend/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/kavia/workspace/code-generation/recipe-manager-183563-183573/recipe_backend/NuGet.config",
+          "/home/kavia/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.121/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

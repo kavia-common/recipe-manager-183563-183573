@@ -7,19 +7,19 @@ builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.SetMinimumLevel(LogLevel.Information);
 
-// Configure Kestrel to bind to 0.0.0.0:3001 by default if no URLs arg/env is provided
-// This allows running in environments where the runner doesn't pass --urls.
+// Configure Kestrel explicitly and ensure it binds to 0.0.0.0 when no explicit URL provided
 builder.WebHost.ConfigureKestrel(options =>
 {
-    // no special Kestrel limits needed for now
+    // No special limits; reserve the spot to customize if needed.
 });
 
-// Only set URLs if neither command-line nor environment provides them
-// ASPNETCORE_URLS or --urls take precedence; otherwise we default to http://0.0.0.0:3001
+// Only set URLs if neither command-line nor environment provides them.
+// ASPNETCORE_URLS or --urls take precedence; otherwise default to http://0.0.0.0:3001
 var hasUrlsFromEnv = !string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ASPNETCORE_URLS"));
 var hasUrlsFromArgs = args.Any(a => a.StartsWith("--urls", StringComparison.OrdinalIgnoreCase));
 if (!hasUrlsFromEnv && !hasUrlsFromArgs)
 {
+    // Default binding for containerized environments
     builder.WebHost.UseUrls("http://0.0.0.0:3001");
 }
 
@@ -65,5 +65,11 @@ app.MapGet("/health", () =>
 .WithSummary("Service health check")
 .WithDescription("Returns status ok to confirm service is running.")
 .Produces<object>(StatusCodes.Status200OK, "application/json");
+
+// Log the bound URLs and environment at startup to aid diagnostics
+var logger = app.Services.GetRequiredService<ILoggerFactory>().CreateLogger("Startup");
+logger.LogInformation("Environment: {Env}", app.Environment.EnvironmentName);
+logger.LogInformation("ASPNETCORE_URLS = {UrlsEnv}", Environment.GetEnvironmentVariable("ASPNETCORE_URLS") ?? "(null)");
+logger.LogInformation("Server listening on: {Addresses}", string.Join(", ", app.Urls));
 
 app.Run();

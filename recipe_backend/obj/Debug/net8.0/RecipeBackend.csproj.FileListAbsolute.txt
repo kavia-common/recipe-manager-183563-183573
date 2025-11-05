@@ -1,0 +1,6 @@
+/home/kavia/workspace/code-generation/recipe-manager-183563-183573/recipe_backend/obj/Debug/net8.0/RecipeBackend.csproj.AssemblyReference.cache
+/home/kavia/workspace/code-generation/recipe-manager-183563-183573/recipe_backend/obj/Debug/net8.0/RecipeBackend.GeneratedMSBuildEditorConfig.editorconfig
+/home/kavia/workspace/code-generation/recipe-manager-183563-183573/recipe_backend/obj/Debug/net8.0/RecipeBackend.AssemblyInfoInputs.cache
+/home/kavia/workspace/code-generation/recipe-manager-183563-183573/recipe_backend/obj/Debug/net8.0/RecipeBackend.AssemblyInfo.cs
+/home/kavia/workspace/code-generation/recipe-manager-183563-183573/recipe_backend/obj/Debug/net8.0/RecipeBackend.csproj.CoreCompileInputs.cache
+/home/kavia/workspace/code-generation/recipe-manager-183563-183573/recipe_backend/obj/Debug/net8.0/RecipeBackend.sourcelink.json
