@@ -1,0 +1,4 @@
+{
+    "command": "dotnet restore",
+    "working_directory": "/home/kavia/workspace/code-generation/recipe-manager-183563-183573/recipe_backend"
+}
