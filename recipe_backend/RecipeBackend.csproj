@@ -7,6 +7,10 @@
     <AssemblyName>RecipeBackend.Root</AssemblyName>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+    <!-- Avoid generating assembly attributes in this wrapper to prevent CS0579
+         since the inner web project generates its own AssemblyInfo. -->
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>
