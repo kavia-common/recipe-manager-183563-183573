@@ -16,6 +16,7 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
+// Enable Swagger in Development environment
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
