@@ -2,6 +2,27 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Minimal console logging: Information and above
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.SetMinimumLevel(LogLevel.Information);
+
+// Configure Kestrel to bind to 0.0.0.0:3001 by default if no URLs arg/env is provided
+// This allows running in environments where the runner doesn't pass --urls.
+builder.WebHost.ConfigureKestrel(options =>
+{
+    // no special Kestrel limits needed for now
+});
+
+// Only set URLs if neither command-line nor environment provides them
+// ASPNETCORE_URLS or --urls take precedence; otherwise we default to http://0.0.0.0:3001
+var hasUrlsFromEnv = !string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ASPNETCORE_URLS"));
+var hasUrlsFromArgs = args.Any(a => a.StartsWith("--urls", StringComparison.OrdinalIgnoreCase));
+if (!hasUrlsFromEnv && !hasUrlsFromArgs)
+{
+    builder.WebHost.UseUrls("http://0.0.0.0:3001");
+}
+
 // Add services to the container.
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -16,12 +37,23 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
-// Enable Swagger in Development environment
+// Enable Swagger in Development environment only
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// PUBLIC_INTERFACE
+app.MapGet("/", () =>
+{
+    /** Root endpoint to confirm server is running. */
+    return Results.Ok(new { name = "recipe-backend", status = "running", version = "v1" });
+})
+.WithName("Root")
+.WithSummary("Root endpoint")
+.WithDescription("Returns basic service info to confirm the server is running.")
+.Produces<object>(StatusCodes.Status200OK, "application/json");
 
 // PUBLIC_INTERFACE
 app.MapGet("/health", () =>
