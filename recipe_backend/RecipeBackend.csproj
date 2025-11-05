@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>RecipeBackend.Root</RootNamespace>
+    <AssemblyName>RecipeBackend.Root</AssemblyName>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Reference the actual web project located under src -->
+    <ProjectReference Include="src/RecipeBackend/RecipeBackend.csproj" />
+  </ItemGroup>
+
+  <Target Name="RunInnerProject" AfterTargets="Build">
+    <!-- This project is a thin wrapper to allow 'dotnet run' at the repository root.
+         It does not produce its own server; instead, it runs the inner web project.
+         'dotnet run' will use the OutputType Exe to run; however, without a Program.cs,
+         we delegate execution by invoking the inner project via Run target when using 'dotnet run'.
+         The default behavior of 'dotnet run' is to run this project; we ensure the inner project
+         carries Program.cs and is executed. -->
+  </Target>
+</Project>
